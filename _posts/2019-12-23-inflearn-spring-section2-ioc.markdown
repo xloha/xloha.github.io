@@ -9,7 +9,8 @@ Spring IoC의 기본 개념
 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리함
 
 
-# 
+
+
 # 5강(스프링 IoC)
 
 ### Inversion of Control : 제어권의 역전
@@ -79,6 +80,9 @@ class OwnerController {
 
   * 따라서 이 안에서 사용하는 모든 코드들은 전부 다 안전하게 사용가능
 
+
+
+
 * OwnerRepository는 누가 넣어줄까?
 
   **[ test > OwnerControllerTests.java ]**
@@ -96,7 +100,7 @@ class OwnerController {
   * **Bean** : 스프링이 관리하는 객체
     * 스프링이 관리하는 Bean으로 등록이 되면 OwnerController를 만들 때 `OwnerRepository` 타입의 빈을 가져와서 주입을 해줌 
     * who? 스프링이 해줌. 스프링에 있는 IoC Controller가 이 일을 해 줌
-  * Spring : Bean들의 의존성을 관리하고, 객체를 만들어서 Bean으로 등록을 해줌. 그렇게 만들어진 객체들을  스프링 컨테이너 안에 있기 때문에 Bean이라고 부르는 것이고, 그 Bean들의 의존성을 관리해줌.
+  * **Spring** : Bean들의 의존성을 관리하고, 객체를 만들어서 Bean으로 등록을 해줌. 그렇게 만들어진 객체들을  스프링 컨테이너 안에 있기 때문에 Bean이라고 부르는 것이고, 그 Bean들의 의존성을 관리해줌.
     * 의존성 관리: 필요한 의존성을 서로 주입을 해준다는 것임(특정한 생성자나, annotation을 보고)
 
 
