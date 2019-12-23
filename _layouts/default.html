@@ -11,7 +11,22 @@
 			<p class="tagline">{{ site.plainwhite.tagline }}</p>
 			<ul class="social">
 				<a href="https://github.com/{{ site.plainwhite.social_links.github }}"><li><i class="icon-github-circled"></i></li></a>
-			</ul>
+			<!-- </ul>
+			<p class="tagline">카테고리</p>
+
+			<ul class="social" style="list-style-type: disc;">
+			{% for category in site.categories %}
+				<div style="text-align: right;">
+					<a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}">
+						<li style="margin: 0px 10px 0px 0px;"> 
+							{{ category | first }}
+						</li>
+						<span class="badge">{{ category | last | size }}</span>
+					</a>
+				</div>
+				{% endfor %}
+			</ul> -->
+
 			<p>&copy; 2019</p>
 		</section>
 		<section class="content">
