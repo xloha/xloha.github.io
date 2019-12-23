@@ -4,17 +4,12 @@ title:  "스프링 입문 section 1 정리안"
 date:   2019-12-23 05:57:55 +0900
 categories: spring
 ---
-인프런에 있는 
-
-[예제로 배우는 스프링 입문(개정판)]: https://www.inflearn.com/course/spring_revised_edition
-
-강의를 보고 정리한 Spring의 기본 개념들
+인프런에 있는 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리한 Spring의 기본 개념들
 
 # 3강 (프로젝트 살펴보기)
 
 ### pet-clinic 프로젝트를 이용
-
-[pet-clinic github]: https://github.com/spring-projects/spring-petclinic
+[PetClinic Github][pet-clinic github]
 
 * 메이븐에 패키지를 실행 : 프로젝트를 빌드해서  패키지 파일을 만듦
 * 프로젝트의 타입에 아무것도 지정하지 않으면 기본적으로 jar(자바 아카이브)
@@ -33,6 +28,8 @@ java -jar target/*.jar
 ```
 
 - 플러그인이 실행되어야 로컬호스트에서 실행가능 
+
+
 
 # 4강 (프로젝트 과제 풀이)
 
@@ -59,6 +56,10 @@ user lacks privilege or object not found: OWNER0_.AGE
 
 * 스키마 파일에서 데이터베이스를 고쳐주면 됨
 
+
+--------------------
+
+
 #### 에러
 
 ```
@@ -70,3 +71,7 @@ Caused by: org.hsqldb.HsqlException: row column count mismatch
 #### 해결방법
 
 * 데이터 INSERT구문을 수정
+
+
+[inflearn-link]:https://www.inflearn.com/course/spring_revised_edition
+[pet-clinic github]: https://github.com/spring-projects/spring-petclinic
