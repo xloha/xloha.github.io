@@ -99,3 +99,7 @@ class OwnerController {
   * Spring : Bean들의 의존성을 관리하고, 객체를 만들어서 Bean으로 등록을 해줌. 그렇게 만들어진 객체들을  스프링 컨테이너 안에 있기 때문에 Bean이라고 부르는 것이고, 그 Bean들의 의존성을 관리해줌.
     * 의존성 관리: 필요한 의존성을 서로 주입을 해준다는 것임(특정한 생성자나, annotation을 보고)
 
+
+
+
+[inflearn-link]:https://www.inflearn.com/course/spring_revised_edition
