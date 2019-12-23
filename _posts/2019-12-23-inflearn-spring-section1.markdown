@@ -6,6 +6,7 @@ categories: spring
 ---
 인프런에 있는 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리한 Spring의 기본 개념들
 
+
 # 3강 (프로젝트 살펴보기)
 
 ### pet-clinic 프로젝트를 이용
@@ -28,6 +29,7 @@ java -jar target/*.jar
 ```
 
 - 플러그인이 실행되어야 로컬호스트에서 실행가능 
+
 
 
 
@@ -57,7 +59,11 @@ user lacks privilege or object not found: OWNER0_.AGE
 * 스키마 파일에서 데이터베이스를 고쳐주면 됨
 
 
+
+
 --------------------
+
+
 
 
 #### 에러
