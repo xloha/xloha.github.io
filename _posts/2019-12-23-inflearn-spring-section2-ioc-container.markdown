@@ -7,10 +7,8 @@ categories: spring
 Spring IoC Container의 기본 개념
 
 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리함
-  
-##   
-  
-##     
+    
+    
   
 # 6강(스프링 IoC Container)
 
@@ -66,11 +64,10 @@ Spring IoC Container의 기본 개념
     * `JCacheManagerCustomizer` 타입의 객체가 스프링 IoC 컨테이너 안에 Bean으로 등록이 됨 
 
          
-##  
-    
-##  
-    
-##      
+
+
+
+
 * 만들어서 등록이 된 Bean들은 스프링의 IoC컨테이너가 서로 의존성 주입을 해 줌 
 
   ```java
@@ -88,8 +85,9 @@ Spring IoC Container의 기본 개념
 * **의존성 주입은 Bean끼리만 가능함** => 스프링 IoC 컨테이너 안에 들어있는 객체들끼리만  의존성 주입을 해 줌,  IoC컨테이너가 관리하는 Bean들을 가져오는 방법을 제공함
 
   * 스프링 IoC 컨테이너 밖에 있는 객체에 의존성 주입을 해주지는 않음
-    
-##     
+
+
+     
 
 ```java
 @AutoWired
@@ -104,7 +102,7 @@ ApplicationContext applicationContext;
 * `ApplicationContext` 안에 모든 Bean들이 들어있음 (이 Bean들에 접근할 수 있는 interface를 ApplicationContext가 상속을 받고 있기 때문에 들어 있는 Bean들을 조회할 수 있음)
 * `applicationContext.getBeanDefinitionNames();` : 들어있는 모든 Bean들의 이름을 가져올 수 있음
   
-##  
+  
   
 ```java
 @Test
@@ -116,9 +114,9 @@ ApplicationContext applicationContext;
 
 * `OwnerController`를 타입으로 꺼내오면 실제 객체가 나온다는 것을 확인할 수 있음 
   
-##  
+    
   
-##  
+    
   
 **[ OwnerController.java ]**
 
@@ -145,10 +143,8 @@ private final ApplicationContext applicationContext;
 
 * `ApplicationContext`가 가지고 있는 Bean들은 알아서 주입을 해주기 때문에 굳이 `getBean()`으로 가져와서 주입을 해 줄 필요는 없음 
   
-##  
   
-  
-## 
+   
 
 ```java
  @GetMapping("/bean")
@@ -159,9 +155,9 @@ private final ApplicationContext applicationContext;
 ```
 
 * 이렇게만 해줘도 Bean을 가져올 수 있음
-
-
-
+  
+  
+  
 ```java
 @GetMapping("/bean")
     @ResponseBody
@@ -171,7 +167,7 @@ private final ApplicationContext applicationContext;
     }
 ```
 
-![image-20191223172454777](/assets/image/image-20191223172454777.png)
+![image-20191223185559930](/assets/image/image-20191223185559930.png)
 
 * 같은 해쉬 값을 보여줌 => 즉, 둘이 **같은 인스턴스**임
 * **싱글톤 scope의 객체** : 어떤 인스턴스 하나를 application 전반에서 계속해서 재사용 (매번 새로 만드는 것 **X**)
