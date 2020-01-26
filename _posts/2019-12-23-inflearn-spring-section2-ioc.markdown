@@ -13,9 +13,9 @@ Spring IoC의 기본 개념
 
 # 5강(스프링 IoC)
 
-### Inversion of Control : 제어권의 역전
+## Inversion of Control : 제어권의 역전
 
-#### 기존 방법
+### 기존 방법
 
 ```java
 class OwnerController {
@@ -25,7 +25,7 @@ class OwnerController {
 
 * 자기가 사용할 의존성을 자기가 만들어서 관리함
 
-#### IoC 사용
+### IoC 사용
 
 ```java
 class OwnerController {

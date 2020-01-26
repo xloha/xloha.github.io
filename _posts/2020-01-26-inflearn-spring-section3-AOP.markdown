@@ -67,7 +67,7 @@ class AAABBB{
 
 <br/>
 
-### PetClinic 프로젝트에서의 AOP
+## PetClinic 프로젝트에서의 AOP
 
 ```java
 // [ OwnerRepository.java ]
@@ -87,7 +87,7 @@ class AAABBB{
 
 <br/>
 
-### 다양한 AOP 구현 방법
+## 다양한 AOP 구현 방법
 
 1. 컴파일 (AspectJ)
    * 원래 자바 컴파일 : A.java --------> A.class

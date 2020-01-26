@@ -18,7 +18,7 @@ Proxy Pattern을 사용해서 Spring AOP구현해보기
 
 <br/>
 
-### CreditCard가 지불 방식을 정하는 Payment
+## CreditCard가 지불 방식을 정하는 Payment
 
 
 
@@ -98,7 +98,7 @@ public class Store {
 <br/>
 
 
-### 성능 측정이 되는 Payment
+## 성능 측정이 되는 Payment
 
 **[ CashPerf.java ]**
 
@@ -173,7 +173,7 @@ class StoreTest {
 
 <br/>
 
-### 원래의 Payment의 경우
+## 원래의 Payment의 경우
 
 ```java
 class StoreTest {

@@ -60,14 +60,14 @@ OwnerController bean = applicationContext.getBean(OwnerController.class)
   
 <br/>   
 
-### BEAN으로 만드는 방법
+## BEAN으로 만드는 방법
 
 1. `@ComponentScan`
 2. 직접 등록하는 방법
 
 <br/>
 
-### 1. Sample Controller를 `@ComponentScan`을 사용해서 Bean으로 등록
+## 1. Sample Controller를 `@ComponentScan`을 사용해서 Bean으로 등록
 
 **[ SampleController.java ]**
 
@@ -115,7 +115,7 @@ public class SampleControllerTest {
 
 <br/>
 
-### 2. 직접 등록하기
+## 2. 직접 등록하기
 
 * Bean 설정 파일
     * XML
@@ -155,7 +155,7 @@ public class SampleControllerTest {
 
 
 
-### 빈을 꺼내는 방법
+## 빈을 꺼내는 방법
 
 1. `@Autowired` 를 사용하기
 
