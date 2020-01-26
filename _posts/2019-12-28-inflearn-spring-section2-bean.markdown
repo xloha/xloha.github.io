@@ -4,7 +4,7 @@ title:  "스프링 입문 section 2 - Spring Bean"
 date:   2019-12-28 18:05:55 +0900
 categories: spring
 ---
-Spring IoC의 기본 개념
+Spring bean의 기본 개념
 
 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리함
 
