@@ -34,39 +34,40 @@ private OwnerRepository owners;
 
 *  필드에 사용 가능 
 
-  * 필드로 바로 주입받는 방법
+    * 필드로 바로 주입받는 방법
 
-  ```java
-  @Autowired                   //final불가
-  private OwnerRepository owners;
-  ```
+        ```java
+        @Autowired                   //final불가
+        private OwnerRepository owners;
+        ```
 
 * Setter에 사용가능
 
   * spring IoC Container가 `class 인스턴스`를 만들고 나서 Setter를 통해서 IoC컨테이너에 들어있는 Bean중에 `OwnerRepository` 타입을 찾아서 넣어줌
 
-  ```java
-  private OwnerRepository owners;
-      
-  @Autowired
-  public void setOwners(OwnerRepository owners) {
-    this.owners = owners;
-  }
-  ```
+    ```java
+    private OwnerRepository owners;
+        
+    @Autowired
+    public void setOwners(OwnerRepository owners) {
+        this.owners = owners;
+    }
+    ```
 
 *  생성자에 사용가능
 
-  ```java
-  @Autowired
-  public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
-    this.owners = clinicService;
-    this.visits = visits;
-  }
-  ```
+    ```java
+    @Autowired
+    public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
+        this.owners = clinicService;
+        this.visits = visits;
+    }
+    ```
 
-  * 생성자를 사용해서 주입을 하는 것
-  * @Autowired 사용가능
-    * spring 4.3부터 어떤 클래스에 생성자가 하나뿐이고 그 생성자로 주입받는 레퍼런스 변수들이 빈으로 등록되어있다면 그 빈을 자동으로 주입해주도록 spring framework가 해줌 (따라서 @Autowired는 생략 가능)
+    * 생성자를 사용해서 주입을 하는 것
+    * @Autowired 사용가능
+        * spring 4.3부터 어떤 클래스에 생성자가 하나뿐이고 그 생성자로 주입받는 레퍼런스 변수들이 빈으로 등록되어있다면 그 빈을 자동으로 주입해주도록 spring framework가 해줌 (따라서 @Autowired는 생략 가능)
+
 
 * BEAN으로 등록되지 않은 Class를 DI한다면...
 
