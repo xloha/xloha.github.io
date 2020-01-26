@@ -8,7 +8,7 @@ Spring IoC의 기본 개념
 
 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리함
 
-
+<br/>
 
 
 # 5강(스프링 IoC)
@@ -45,7 +45,7 @@ class OwnerController {
 * **의존성을 주입해주는 일 : Dependency injection** (dependency injection 또한 IoC라고 볼 수 있음)
   * why? : 의존성을 관리하는 일 자체, 그 제어권을 inversion했기 때문에 (의존성을 관리하는 일이 외부의 누군가로 바꼈기 때문)
 
-
+<br/>
 
 ```java
 @Controller
@@ -80,7 +80,7 @@ class OwnerController {
 
   * 따라서 이 안에서 사용하는 모든 코드들은 전부 다 안전하게 사용가능
 
-
+<br/>
 
 
 * OwnerRepository는 누가 넣어줄까?

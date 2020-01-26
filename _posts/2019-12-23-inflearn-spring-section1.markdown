@@ -6,9 +6,7 @@ categories: spring
 ---
 인프런에 있는 [예제로 배우는 스프링 입문(개정판)][inflearn-link] 강의를 보고 정리한 Spring의 기본 개념들
 
-
-
-
+<br/>
 
 # 3강 (프로젝트 살펴보기)
 
@@ -33,9 +31,8 @@ java -jar target/*.jar
 
 - 플러그인이 실행되어야 로컬호스트에서 실행가능 
 
-
-
-
+<br/>
+<br/>
 
 
 # 4강 (프로젝트 과제 풀이)
@@ -46,6 +43,8 @@ java -jar target/*.jar
 ```
 
 * :firstName 콜론 다음 파라미터는 항상 바뀐다는 것을 알려주는 것이기 때문에 와일드카드를 콜론 앞에 사용해야함 
+
+<br/>
 
 ### AGE만 dao에 추가했을 경우 
 
@@ -63,13 +62,11 @@ user lacks privilege or object not found: OWNER0_.AGE
 
 * 스키마 파일에서 데이터베이스를 고쳐주면 됨
 
-
-
+<br/>
 
 --------------------
 
-
-
+<br/>
 
 #### 에러
 
