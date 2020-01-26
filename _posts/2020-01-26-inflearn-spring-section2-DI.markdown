@@ -80,7 +80,7 @@ private OwnerRepository owners;
   * OwnerController에 필요한 의존성을 넣어줄 수 없기 때문에 오류가 남
   * 의존성 주입이 만족이 되지 않을 경우 뜨는 에러 : `No qualifying bean of type 'org.springframework.samples.petclinic.owner.sampleRepository' available`
 
-
+<br/>
 
 ### 셋 중에서 어떤 방법을 사용하면 좋을까?
 
@@ -91,6 +91,7 @@ private OwnerRepository owners;
     * 이 클래스는 OwnerRepository없이는 제대로 동작할 수 없기 때문에 **클래스 입장에서 OwnerRepository는 반드시 있어야하는 객체** (이를 강제하기 위한 가장 좋은 수단은 생성자를 사용하는 것)
     * `Field injection`, `Setter injection`**은 의존성 주입이 제대로 되지 않아도 OwnerController 인스턴스를 만들 수 있음**
 
+<br/>
   
 
 >  BUT, 순환참조 발생 시 애플리케이션이 뜨지 않는 오류 발생(A가 B참조 , B가 A참조  => 둘 다 생성자 injection을 사용한다면 못만듦)
