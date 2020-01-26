@@ -2,7 +2,7 @@
 layout: post
 title:  "스프링 입문 section 2 - Dependency Injection"
 date:   2020-01-26 15:30:00 +0900
-categories: spring
+categories: spring DI
 ---
 Spring DI의 기본 개념
 

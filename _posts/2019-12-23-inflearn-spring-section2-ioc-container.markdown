@@ -2,7 +2,7 @@
 layout: post
 title:  "스프링 입문 section 2 - IoC Container란?"
 date:   2019-12-23 18:51:55 +0900
-categories: spring
+categories: spring IoC-Container
 ---
 Spring IoC Container의 기본 개념
 

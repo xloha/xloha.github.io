@@ -2,7 +2,7 @@
 layout: post
 title:  "스프링 입문 section 3 - Spring AOP"
 date:   2020-01-26 16:31:00 +0900
-categories: spring
+categories: spring AOP
 ---
 Spring AOP의 기본 개념
 
@@ -105,6 +105,8 @@ class AAABBB{
    * 기존의 코드를 건드리지 않고 새로운 기능을 넣는 것 (클라이언트 코드에 영향을 적게 주면서 그 객체를 다른 객체로 바꾸는 방법)
 
 
+<br/>
+<br/>
 
 > 자바 컴파일 과정
 >

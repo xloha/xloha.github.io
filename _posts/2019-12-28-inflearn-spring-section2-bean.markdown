@@ -2,7 +2,7 @@
 layout: post
 title:  "스프링 입문 section 2 - Spring Bean"
 date:   2019-12-28 18:05:55 +0900
-categories: spring
+categories: spring Bean
 ---
 Spring bean의 기본 개념
 
