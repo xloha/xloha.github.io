@@ -32,7 +32,7 @@ RMI방식에 멀티캐스트로 노드를 찾는 방식을 사용하였다.
 
 <br/>
 
-# Spring boot에서 Caffeine캐시 설정
+# Spring boot에서 Ehcache캐시 설정
 
 **[ build.gradle ]**
 
