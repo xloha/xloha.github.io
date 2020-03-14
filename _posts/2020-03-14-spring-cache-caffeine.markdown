@@ -40,7 +40,7 @@ categories: spring cache caffeine k8s
 
 **[ build.gradle ]**
 
-```build.gradle
+```
 // caffeine cache
 compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.6.2'
 compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
