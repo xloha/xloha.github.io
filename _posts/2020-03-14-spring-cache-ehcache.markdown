@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "스프링 캐시 - Ehcache(2 / 3)"
+title:  "스프링 부트 캐시 - Ehcache(2 / 3)"
 date:   2020-03-14 17:30:00 +0900
-categories: spring cache ehcache k8s 
+categories: springboot cache ehcache k8s 
 ---
 
 쿠버네티스로 파드를 여러 개 띄울 시 로컬 캐시는 생각한 것 보다 캐시 히트율이 낮았기 때문에 Ehcache를 사용해보기로 했다.

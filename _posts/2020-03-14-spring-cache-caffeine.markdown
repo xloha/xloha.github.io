@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "스프링 캐시 - Caffeine(1 / 3)"
+title:  "스프링 부트 캐시 - Caffeine(1 / 3)"
 date:   2020-03-14 17:11:00 +0900
-categories: spring cache caffeine k8s 
+categories: springboot cache caffeine k8s 
 ---
 
 프로젝트 진행 중 **불필요한 호출을 줄이고, 성능을 향상시키고자** 캐시를 사용하기로 하였다. 
