@@ -26,8 +26,9 @@ plainwhite:
     - title: Algorithm
       url: "/java/algorithm"
   search: true
-  #comment
-  disqus_shortname: EY
+  dark_mode: true
+  # comment
+  #disqus_shortname: EY
   # generate social links in footer
   social_links:
     github:  EunYeongKim
