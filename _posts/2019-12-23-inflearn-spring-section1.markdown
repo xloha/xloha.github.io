@@ -10,7 +10,7 @@ categories: spring
 
 # 3강 (프로젝트 살펴보기)
 
-### pet-clinic 프로젝트를 이용
+## pet-clinic 프로젝트를 이용
 [PetClinic Github][pet-clinic github]
 
 * 메이븐에 패키지를 실행 : 프로젝트를 빌드해서  패키지 파일을 만듦
@@ -46,9 +46,9 @@ java -jar target/*.jar
 
 <br/>
 
-### AGE만 dao에 추가했을 경우 
+## AGE만 dao에 추가했을 경우 
 
-#### 에러 
+### 에러 
 
 ```
 user lacks privilege or object not found: OWNER0_.AGE
@@ -56,7 +56,7 @@ user lacks privilege or object not found: OWNER0_.AGE
 
 * AGE가 컬럼에 없기 때문에 생기는 오류
 
-#### 해결방법
+### 해결방법
 
 * `Application.properties` 에 데이터베이스 스키마파일의 정의를 볼 수 있음 
 
@@ -68,7 +68,7 @@ user lacks privilege or object not found: OWNER0_.AGE
 
 <br/>
 
-#### 에러
+### 에러
 
 ```
 Caused by: org.hsqldb.HsqlException: row column count mismatch
@@ -76,7 +76,7 @@ Caused by: org.hsqldb.HsqlException: row column count mismatch
 
 * 데이터를 넣을 때 주로 발생하는 에러 (컬럼에 맞게 데이터를 넣지 않아서)
 
-#### 해결방법
+### 해결방법
 
 * 데이터 INSERT구문을 수정
 

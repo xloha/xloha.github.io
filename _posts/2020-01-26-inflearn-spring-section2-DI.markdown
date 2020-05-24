@@ -30,7 +30,7 @@ private OwnerRepository owners;
 
 
 
-### Autowired
+## Autowired
 
 *  필드에 사용 가능 
 
@@ -82,7 +82,7 @@ private OwnerRepository owners;
 
 <br/>
 
-### 셋 중에서 어떤 방법을 사용하면 좋을까?
+## 셋 중에서 어떤 방법을 사용하면 좋을까?
 
 * spring framework reference에서 권장하는 방법
 
