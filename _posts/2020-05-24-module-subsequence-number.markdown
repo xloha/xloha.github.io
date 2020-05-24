@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "(모듈) 연속된 숫자 찾아서 변환"
-date:   2020-05-24 17:345:00 +0900
+date:   2020-05-24 17:45:00 +0900
 categories: java algorithm  
 ---
 
