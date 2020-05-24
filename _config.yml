@@ -22,6 +22,12 @@ plainwhite:
   sitemap: true # set to true to generate sitemap.xml content
 
   category_dir: category/
+  navigation:
+    - title: Posts
+      url: "/_posts"
+  search: true
+  #comment
+  disqus_shortname: games
   # generate social links in footer
   social_links:
     github:  EunYeongKim
