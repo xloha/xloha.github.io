@@ -3,6 +3,7 @@ layout: post
 title:  "(모듈) 연속된 가장 긴 문자열"
 date:   2020-05-24 18:10:00 +0900
 categories: java algorithm 
+permalink: '/algorithm/(모듈) 연속된 가장 긴 문자열'
 ---
 
 <br>
