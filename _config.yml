@@ -24,7 +24,7 @@ plainwhite:
   category_dir: category/
   navigation:
     - title: Algorithm
-      url: "/java/algorithm"
+      url: "/algorithm"
   search: true
   dark_mode: true
   # comment
