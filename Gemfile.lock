@@ -72,6 +72,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  i18n
   jekyll (~> 3.8)
   jekyll-feed (~> 0.12)
   minima (~> 2.5)
@@ -81,4 +82,4 @@ DEPENDENCIES
   wdm (~> 0.1.1)
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
