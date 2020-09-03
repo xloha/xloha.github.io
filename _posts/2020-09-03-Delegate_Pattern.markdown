@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "(iOS) Delegate Pattern"
-date:   2020-09-03 03:12:00 +0900
+date:   2020-09-03 15:12:00 +0900
 categories: iOS swift delegatePattern
 ---
 <br>

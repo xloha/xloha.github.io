@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "(iOS) outlet & Action"
-date:   2020-09-03 02:55:00 +0900
+date:   2020-09-03 14:55:00 +0900
 categories: iOS swift
 ---
 
