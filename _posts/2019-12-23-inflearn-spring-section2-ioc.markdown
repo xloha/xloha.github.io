@@ -13,9 +13,12 @@ Spring IoC의 기본 개념
 
 # 5강(스프링 IoC)
 
-## Inversion of Control : 제어권의 역전
+## Inversion of Control : 제어권의 역전 
+의존성을 관리하는 일은 스프링 프레임워크(IoC Container)가 해주는 것
 
 ### 기존 방법
+* 자기가 사용할 의존성을 자기가 만들어서 관리함
+* `OwnerRepository`를 코드로 직접 생성하며 의존성을 주입하고 있음
 
 ```java
 class OwnerController {
@@ -23,7 +26,7 @@ class OwnerController {
 }
 ```
 
-* 자기가 사용할 의존성을 자기가 만들어서 관리함
+
 
 ### IoC 사용
 
