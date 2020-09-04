@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(iOS) Outlet의 Strong & Weak"
+title:  "(iOS) Outlet의 Implicitly Unwrapped Optional"
 date:   2020-09-04 15:10:00 +0900
 categories: iOS swift
 ---
