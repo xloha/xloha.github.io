@@ -6,7 +6,7 @@ categories: iOS swift delegatePattern
 ---
 <br>
 
-Delegate Pattern이란?
+❓ Delegate Pattern이란?
 
 1. 데이터를 공급하는 역할(대부분 datasource라는 접미어를 가지고 있음)
 2. 이벤트를 처리하는 역할
@@ -85,7 +85,7 @@ Delegate Pattern이란?
 
 <br>
 
-# Delegate Pattern의 장점
+# ✅ Delegate Pattern의 장점
 
 * 개발 유연성 증가 
   * 원하는 데이터를 원하는 방식으로 출력 가능 

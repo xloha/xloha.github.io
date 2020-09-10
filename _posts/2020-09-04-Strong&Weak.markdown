@@ -10,7 +10,7 @@ categories: iOS swift
 @IBOutlet weak var listTableView: UITableView!
 ```
 
-Outlet을 연결하면 자동으로 선언되는 weak의 의미는 무엇일까,,,,,🤔  
+❓ Outlet을 연결하면 자동으로 선언되는 weak의 의미는 무엇일까,,,,,🤔  
 <br>
 
 ## Strong과 Weak의 개념
