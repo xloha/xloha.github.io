@@ -31,7 +31,6 @@ extension ThumbnailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return CGSize.zero }
         var bounds = thumbCollectionView.bounds
-        bounds.size.height += bounds.origin.y
 
         var width = bounds.width - (layout.sectionInset.left + layout.sectionInset.right)
         var height = bounds.height - (layout.sectionInset.top + layout.sectionInset.bottom)
