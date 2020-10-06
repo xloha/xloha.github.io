@@ -27,7 +27,7 @@ keyboard가 보일 때, keyboard가 내려갈 때를 알려주는 Notificaiton�
 <br>
 
 # 문제 상황
-![before](/assets/image/BeforekeyboardNotification.png)
+<img src="/assets/image/BeforekeyboardNotification.png" alt="여백 주기 전 이미지" style="zoom: 40%;"/> 
 
 <br>
 
@@ -40,8 +40,6 @@ var willHideToken: NSObjectProtocol?
 <br>
 
 ## 1-1. 키보드가 나타날 때
-
-<br>
 
 키보드가 나타날 때 `TextView`와 `TextView의 Scroll`에도 키보드만큼의 여백을 줘야 함
 
@@ -66,7 +64,6 @@ willShowToken = NotificationCenter.default.addObserver(forName: UIResponder.keyb
 
 ## 1-2. 키보드가 사라질 때
 
-<br>
 
 키보드가 사라질 때 설정했던 여백을 없앰
 
@@ -102,4 +99,4 @@ deinit {
 <br>
 
 # 결과
-![after](/assets/image/AfterkeyboardNotification.png)
+<img src="/assets/image/AfterkeyboardNotification.png" alt="여백 준 후 이미지" style="zoom: 40%;"/> 
