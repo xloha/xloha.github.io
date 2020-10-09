@@ -8,7 +8,7 @@ description: > # this means to ignore newlines until "show_exerpts:"
   Google search results) and in your feed.xml site description.
 show_excerpts: true # set to true to show excerpts on the homepage
 
-url: "https://eunyeongkim.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: "https://eunyeongkim.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 
 # Minima date format
@@ -20,15 +20,16 @@ plainwhite:
   tagline: Developer
   date_format: "%Y/%m/%d"
   sitemap: true # set to true to generate sitemap.xml content
-
-  category_dir: category/
-  navigation:
-    - title: Algorithm
-      url: "/algorithm/java"
+  # navigation:
+  #   - title: Algorithm
+  #     url: "/algorithm/java"
   search: true
   dark_mode: true
   # comment
-  #disqus_shortname: EY
+  disqus_shortname: eunyeong
+  condensed_mobile:
+    - post
+    - page
   # generate social links in footer
   social_links:
     github:  EunYeongKim
