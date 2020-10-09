@@ -20,15 +20,16 @@ plainwhite:
   tagline: Developer
   date_format: "%Y/%m/%d"
   sitemap: true # set to true to generate sitemap.xml content
-
-  category_dir: category/
-  navigation:
-    - title: Algorithm
-      url: "/algorithm/java"
+  # navigation:
+  #   - title: Algorithm
+  #     url: "/algorithm/java"
   search: true
   dark_mode: true
   # comment
-  #disqus_shortname: EY
+  disqus_shortname: eunyeong
+  condensed_mobile:
+    - post
+    - page
   # generate social links in footer
   social_links:
     github:  EunYeongKim

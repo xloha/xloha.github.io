@@ -76,10 +76,10 @@ PLATFORMS
 DEPENDENCIES
   i18n
   jekyll (~> 3.8)
-  jekyll-feed (~> 0.12)
+  jekyll-feed
   jekyll-sitemap
   minima (~> 2.5)
-  plainwhite (~> 0.11)
+  plainwhite
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)
