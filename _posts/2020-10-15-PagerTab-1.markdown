@@ -1,0 +1,181 @@
+---
+layout: post
+title:  "(iOS) PagerTab 구현해보기 1 / 2"
+date:   2020-10-15 17:10:00 +0900
+categories: iOS swift 
+tags:
+- CollectionView
+- PageViewController
+- Delegate
+- AutoLayout
+---
+<br>
+
+페이지 탭바를 만들어보기로 했다. 안드로이드와 달리 iOS는 Pager Tab을 제공해주지 않는다. 따라서 라이브러리를 많이 쓴다고 한다. 전체 코드는 [EUNPPINGMALL](https://github.com/EunYeongKim/EUNPPINGMALL) 이곳에서 확인할 수 있다.  
+
+[여기서](https://nsios.tistory.com/44) 도움을 많이 받았고, 코드를 참고하였다. 
+
+ `CollectionView, PageViewController, Delegate Pattern`을 이용하였다.
+
+* `CollectionView`
+    * 탭 메뉴
+* `PageViewController`
+    * 표시할 페이지
+
+<br>
+
+❓ `ContainerView` 가 가리키는 `ViewController` 찾는 방법은?
+
+✅  `self.children`으로 자식 뷰를 찾는다
+
+<br>
+
+# 1. 화면 구성
+
+<img src="/assets/image/image-20201015163624322.png" style="zoom: 50%;">
+
+* `CollectionView`에 `Cell`을 넣어서 메뉴를 만듬
+* `UIView`로 메뉴 아래의 움직일 바를 만들어줌
+* 보여질 페이지 부분에는 컨테이너 뷰를 넣고, `PagerViewController`와 연결  
+
+<br>
+
+# 2. CollectionView Cell 
+
+```swift
+class TabMenuCollectionViewCell: UICollectionViewCell {
+    var menuStr: String? {
+        didSet {
+            guard let menu = menuStr else { return }
+            self.menuLabel.text = menu
+        }
+    }
+    
+    @IBOutlet weak var menuLabel: UILabel!
+
+    override func prepareForReuse() {
+        isSelected = false
+    }
+}
+```
+* 간단하게 위와 같이 작성해주면 된다.
+
+<br>
+
+# 3. 탭 메뉴
+
+```swift
+let menu = ["PRODUCT", "RECENT", "WISHLIST"]
+    
+@IBOutlet weak var collectionView: UICollectionView!
+@IBOutlet weak var menuUnderBar: UIView!
+
+var pageVCDelegate: PageViewControllerDelegate?
+var constraints: [NSLayoutConstraint] = []
+```
+* `var pageVCDelegate` : 메뉴 탭을 눌렀을 시에 `PageViewController`가 처리해 줄 페이지 전환 메소드를 사용하기 위해
+* `var constraints` : 메뉴 탭을 눌렀을 시에 메뉴바가 움직일 때 Constraints의 오류를 없애기 위해
+
+<br>
+
+## 초기 설정을 위한 메소드 
+
+```swift
+func setFirstIndexIsSelected() {
+    let selectedIndexPath = IndexPath(item: 0, section: 0)
+    collectionView(collectionView, didSelectItemAt: selectedIndexPath)
+    collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .right)
+}
+
+func setDelegate() {
+    guard let vc = self.children.first as? TabMenuPageViewController else { return }
+    vc.menuDelegate = self
+    vc.setDelegate(self)
+}
+```
+<br>
+
+## 메뉴 바 이동
+```swift
+func moveMenuUnderBar(indexPath: IndexPath) {
+    guard let cell = collectionView.cellForItem(at: indexPath) as? TabMenuCollectionViewCell else { return }
+    
+    NSLayoutConstraint.deactivate(constraints)
+    menuUnderBar.translatesAutoresizingMaskIntoConstraints = false
+    constraints = [ menuUnderBar.leadingAnchor.constraint(equalTo: cell.leadingAnchor), menuUnderBar.trailingAnchor.constraint(equalTo: cell.trailingAnchor) ]
+    NSLayoutConstraint.activate(constraints)
+    
+    UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
+}
+```
+* 완전 골져스한 코드여서 갖고왔다,,,,,체고👍
+
+<br>
+
+## 메뉴 바 너비 조정
+```swift
+extension TabMenuViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.width / CGFloat(menu.count)
+        menuUnderBar.frame.size.width = width
+        return CGSize(width: width, height: 50)
+    }
+}
+```
+* 나는 3개의 메뉴만 보여줄 것이여서 따로 width를 계산하였다.
+
+<br>
+
+## `delegate` 구현
+
+```swift
+extension TabMenuViewController: PageIndexDelegate {
+    func selectMenuItem(pageIndex: Int) {
+        let selectedIndexPath = IndexPath(item: pageIndex, section: 0)
+        moveMenuUnderBar(indexPath: selectedIndexPath)
+    }
+}
+```
+* PagerViewController에서 화면을 직접 스크롤 할 때 해당 View에 맞춰 메뉴바를 움직이도록 해주는 함수이다.
+
+<br>
+
+
+# `Delegate`를 주입 해결방법
+
+`Pager Tab`을 만들면서 고민했던 부분이다.  
+
+## 1. `View`의 생성 시기 문제
+<img src="/assets/image/image-20201015163624322.png" style="zoom: 50%;">
+
+* `PagerView`(자식 뷰)를 `ContainerView`(부모 뷰)에 넣은 상태
+* 나는 당연히 `ContainerView`가 있는 `ViewController`가 먼저 불릴 줄 알았는데 `PagerView`가 먼저 생성되고 `ContainerView`가 있는 `ViewController`가 그 다음 생성이 된다. 
+    * 부모 뷰는 자식 뷰에 `delegate`를 주입해야하고, 자식 뷰도 부모 뷰에 `delegate` 주입해야하는데 부모 뷰가 먼저 생겨버리기 때문에 부모 뷰에서 자식 뷰의 `delegate`를 주입하는 함수도 실행시켜주었다.
+
+```swift
+func setDelegate() {
+    guard let vc = self.children.first as? TabMenuPageViewController else { return }
+    vc.menuDelegate = self
+    vc.setDelegate(self)
+}
+```
+<br>
+
+## 2. 알맞은 `View`를 찾지 못한 문제
+
+```swift
+UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name) as? TabMenuPageViewController
+```
+
+* 처음에는 위와 같이 작성해서 `PagerViewController`를 찾았는데 이렇게 찾을 경우 처음에 생성된 자식 뷰가 아닌 새로운 뷰이기 때문에 `delegate주입`이 제대로 되지 않는다
+* 따라서 아래와 같이 자식 뷰를 통해 찾아야 한다.
+
+
+```swift
+self.children.first as? TabMenuPageViewController
+```
+
+<br>
+<br>
+
+나머지는 다 이해가능한 부분이여서 설명을 생략한다.
