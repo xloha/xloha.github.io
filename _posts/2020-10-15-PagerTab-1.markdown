@@ -15,6 +15,11 @@ tags:
 
 [여기서](https://nsios.tistory.com/44) 도움을 많이 받았고, 코드를 참고하였다. 
 
+## 최종 결과물~👻 
+<img src="/assets/image/SwiftPagerTab.png" style="zoom: 30%;"/> <img src="/assets/image/PagerTabGIF.gif" style="zoom: 60%;"/>
+
+<br>
+
  `CollectionView, PageViewController, Delegate Pattern`을 이용하였다.
 
 * `CollectionView`
@@ -150,7 +155,7 @@ extension TabMenuViewController: PageIndexDelegate {
 
 * `PagerView`(자식 뷰)를 `ContainerView`(부모 뷰)에 넣은 상태
 * 나는 당연히 `ContainerView`가 있는 `ViewController`가 먼저 불릴 줄 알았는데 `PagerView`가 먼저 생성되고 `ContainerView`가 있는 `ViewController`가 그 다음 생성이 된다. 
-    * 부모 뷰는 자식 뷰에 `delegate`를 주입해야하고, 자식 뷰도 부모 뷰에 `delegate` 주입해야하는데 부모 뷰가 먼저 생겨버리기 때문에 부모 뷰에서 자식 뷰의 `delegate`를 주입하는 함수도 실행시켜주었다.
+    * 부모 뷰는 자식 뷰에 `delegate`를 주입해야하고, 자식 뷰도 부모 뷰에 `delegate` 주입해야하는데 자식 뷰가 먼저 생겨버리기 때문에 나중에 생성되는 부모 뷰에서 자식 뷰의 `delegate`를 주입하는 함수도 실행시켜주었다.
 
 ```swift
 func setDelegate() {

@@ -1,0 +1,159 @@
+---
+layout: post
+title:  "(iOS) PagerTab 구현해보기 2 / 2"
+date:   2020-10-16 10:57:00 +0900
+categories: iOS swift 
+tags:
+- PageViewController
+- Delegate
+---
+<br>
+
+페이지 탭바를 만들어보기로 했다. 안드로이드와 달리 iOS는 Pager Tab을 제공해주지 않는다. 따라서 라이브러리를 많이 쓴다고 한다. 전체 코드는 [EUNPPINGMALL](https://github.com/EunYeongKim/EUNPPINGMALL) 이곳에서 확인할 수 있다.  
+
+[여기서](https://yagom.net/forums/topic/pageviewcontroller%eb%a1%9c-ui-%ea%b5%ac%ec%84%b1%ed%95%98%ea%b8%b0/) 도움을 많이 받았고, 코드를 참고하였다. 
+
+## 최종 결과물~👻 
+<img src="/assets/image/SwiftPagerTab.png" style="zoom: 30%;"/> <img src="/assets/image/PagerTabGIF.gif" style="zoom: 60%;"/>
+
+<br>
+
+# 1. `Delegate` 상속
+
+```swift
+class TabMenuPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+var menuDelegate: PageIndexDelegate?
+
+let identifiers = ["ProductVC", "RecentVC", "WishListVC"]
+
+lazy var VCArray: [UIViewController] = {
+    return identifiers.map({ (id: String) -> (UIViewController) in
+        return VCInstance(name: id)
+    })
+}()
+
+...
+
+}
+```
+
+* `PageViewController`의 `DataSource`와 `Delegate`를 모두 상속한다.
+* `var menuDelegate` : 페이지를 스크롤 했을 시 알맞은 메뉴로 메뉴바를 이동하는 메소드를 사용하기 위해
+* `let identifiers` : 띄울 화면의 ID
+
+<br>
+
+# 2. 탭 메뉴에 해당하는 화면 띄우기
+
+## 초기 화면 설정
+
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.dataSource = self
+    self.delegate = self
+    
+    if let firstVC = VCArray.first {
+        setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+    }
+}
+```
+* `dataSource, delegate` 지정 및 초기에 띄울 화면을 정해줌
+
+<br>
+
+## `Delegate`주입
+
+```swift
+func setDelegate(_ viewController: UIViewController) {
+    guard let vc = viewController as? TabMenuViewController else { return }
+    vc.pageVCDelegate = self
+}
+```
+* 탭 메뉴가 있는(부모) 뷰의 delegate를 주입한다.
+
+<br>
+
+## `Delegate` 구현
+
+```swift
+extension TabMenuPageViewController: PageViewControllerDelegate {
+    func scrollPage(pageIndex: Int, previousIndex: Int) {
+        let direction: UIPageViewController.NavigationDirection = (previousIndex > pageIndex) ? .reverse : .forward
+        
+        self.setViewControllers([VCArray[pageIndex]], direction: direction, animated: true, completion: nil)
+    }
+}
+```
+* 메뉴탭이 있는 `Controller`에서 메뉴를 선택했을 시 해당 화면으로 이동할 수 있도록 해주는 함수이다.
+* `previousIndex`를 받아서 애니메이션의 방향을 결정하여 움직임이 자연스러울 수 있도록 한다.
+
+<br>
+
+# `화면 스크롤 시 알맞는 메뉴로 언더바 움직이기`
+만들면서 "이거 왜 이러지" 했던 부분이다
+
+## 스크롤 시 보여줄 화면을 결정하기
+
+```swift
+func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    guard let viewControllerIndex = VCArray.firstIndex(of: viewController) else { return nil }
+    
+    let previousIndex = viewControllerIndex - 1
+    
+    if previousIndex < 0 {
+        return VCArray.last
+    } else {
+        return VCArray[previousIndex]
+    }
+}
+
+func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    guard let viewControllerIndex = VCArray.firstIndex(of: viewController) else { return nil }
+    
+    let nextIndex = viewControllerIndex + 1
+    
+    if nextIndex >= VCArray.count {
+        return VCArray.first
+    } else {
+        return VCArray[nextIndex]
+    }
+}
+```
+
+* `UIPageViewControllerDataSource`를 상속하면 `viewControllerBefore, viewControllerAfter` 두 개의 함수를 구현하여 보여줄 화면을 결정하게 된다.
+    ```swift
+    if previousIndex < 0 {
+        menuDelegate?.selectMenuItem(pageIndex: VCArray.endIndex)
+        return VCArray.last
+    } else {
+        menuDelegate?.selectMenuItem(pageIndex: previousIndex)
+        return VCArray[previousIndex]
+    }
+    ```
+* 처음에 이 메소드에 메뉴바를 움직이는 코드를 위와 같이 넣었다. 하지만 이 메소드는 내 생각과 다르게 스크롤을 하면 **딱 한번만 불리는** 메소드가 아니였다. 
+    * *따라서 메뉴바가 원하는 곳으로 움직일 때도 있었지만 원하는 메뉴를 건너뛰어서 이상한 곳으로 메뉴바가 이동하는 경우도 있었다.*
+* `viewControllerBefore, viewControllerAfter`는 **`DataSource`** 로 보여줄 화면을 미리 준비할 수도 있기 때문에 딱 한번만 불리는 메소드가 아니다. 
+* 그러므로 메뉴바를 움직이는 함수를 여기서 호출하면 안된다
+
+<br>
+
+## 페이지가 전환되기 전에 불리는 `willTransitionTo`
+
+```swift
+func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+    guard let next = pendingViewControllers.first, let vcIndex = VCArray.firstIndex(of: next) else { return }
+    if vcIndex >= VCArray.count {
+        menuDelegate?.selectMenuItem(pageIndex: 0)
+    } else {
+        menuDelegate?.selectMenuItem(pageIndex: vcIndex)
+    }
+}
+```
+
+* 페이지가 전환되기 이전에 불리는 메소드인 `willTransitionTo`는 `UIPageViewControllerDelegate`를 상속하면 사용할 수 있다.
+    * `pendingViewControllers`는 보여질 `viewController`들이 들어있다.
+* 이 메소드 사용자가 화면을 전환할 때만 불리기 때문에 내가 원하는대로 메뉴바를 알맞게 움직일 수 있었다. 
+
+

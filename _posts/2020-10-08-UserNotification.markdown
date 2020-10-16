@@ -235,4 +235,5 @@ deleteNotification(alarm: alarm)
 <img src="/assets/image/userNotificationForeground.png" alt="foreground" style="zoom: 25%;"/> <img src="/assets/image/userNotificationBackground.png" alt="background" style="zoom: 25%;"/> <img src="/assets/image/userNotificationHold.png" alt="foreground" style="zoom: 25%;"/> 
 
 ### 아직 정해진 요일마다 반복되는지 확인은 못해봤다,,,, 연휴가 끝난 다음에 확인 할 수 있겠지,,,?  
+### -> 확인 완료! 아아아주 잘된당ㅎㅎ😎
 
