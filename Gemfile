@@ -21,6 +21,7 @@ group :jekyll_plugins do
 end
 
 gem 'jekyll-sitemap'
+gem 'jekyll-mermaid'
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
