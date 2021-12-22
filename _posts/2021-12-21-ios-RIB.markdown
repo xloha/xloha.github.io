@@ -1,0 +1,186 @@
+---
+layout: post
+title:  "(iOS) RIBs"
+date: 2021-12-22 10:30:00 +0900
+categories: ios
+tags:
+- iOS
+- RIB
+- architecture
+---
+
+### ❓ `RIB`
+
+### ✅  (Router, Interactor, Builder) View가 없는 아키텍쳐
+
+<br>
+
+> ⭐️ 참고한 영상 및 글
+>
+> [MVC, MVVM, ReactorKit, Viper를 거쳐 RIB 정착기 (1)](https://www.youtube.com/watch?v=3XS6xLzKRjc)
+>
+> [Clean Architecture + MVVM 영화 찾기](https://ios-development.tistory.com/555)
+
+<br>
+<br>
+
+# 아키텍쳐를 사용하는 우리의 바람
+* 격리화
+* 재사용성
+* 수정의 용이함
+* 코드표준화
+* 테스트코드
+* 비즈니스 로직 단순화
+* 명확한 코드 위치
+
+
+### 화면단위가 아닌 프로세스 단위로 유연한 개발 필요 ➡️ viewless 아키텍쳐가 필요
+
+<br>
+
+# RIB Architecture
+### Router, Interactor, View와 프로토콜
+
+<img src="/assets/image/RIBs_diagram.png" style="zoom: 100%;"/>
+
+### Parent, Child 관계
+
+<img src="/assets/image/RIBs_parent_child.png" style="zoom: 100%;"/>
+
+<br>
+<br>
+
+# Interactor
+
+```swift
+import RIBs
+import RxSwift
+
+protocol LoggedInRouting: ViewableRouting {
+
+}
+
+/// View의 Action에 대해 정의
+protocol LoggedInPresentable: Presentable {
+    var listener: LoggedInPresentableListener? { get set }
+}
+
+/// 상위 RIB이 어떠한 Interaction에 대해서 호출을 해야할 때 (Ex.내 작업이 끝났어라고 알려줄 때)
+protocol LoggedInListener: class {
+
+}
+
+final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, LoggedInInteractable, LoggedInPresentableListener {
+    weak var router: LoggedInRouting?
+    weak var listener: LoggedInListener?
+
+    override init(presenter: LoggedInPresentable) {
+        super.init(presenter: presenter)
+        presenter.listener = self
+    }
+
+    override func didBecomeActive() {
+        super.didBecomeActive()
+        // TODO: Implement business logic here
+    }
+
+    override func willResignActive() {
+        super.willResignActive()
+        // TODO: Pause any business logic
+    }
+}
+```
+* Interactor는 Routing을 알고있어야하고, View를 알고 있어야하기 때문에 변수로 가지고 있게됨
+* Router를 어떻게 호출해야될지에 대해서는 Router에 있는것이 아니라, Interactor가 가지고 있어야함
+    * Interactor에서 먼저 코드를 작성한 후에 LoggedInRouting에 정의를 함 (컴파일 기반 프로그래밍, protocol에 작성하지 않으면 컴파일 에러가 나기때문)
+
+<br>
+
+# Router
+
+```swift
+import RIBs
+
+protocol LoggedInInteractable: Interactable {
+    var router: LoggedInRouting? { get set }
+    var listener: LoggedInListener? { get set }
+}
+
+/// view에 present할 것인지, push할 것인지 등 방향 정의
+protocol LoggedInViewControllable: ViewControllable {
+
+}
+
+final class LoggedInRouter: ViewableRouter<LoggedInInteractable, LoggedInViewControllable>, LoggedInRouting {
+    override init(interactor: LoggedInInteractable, viewController: LoggedInViewControllable) {
+        super.init(interactor: interactor, viewController: viewController)
+        interactor.router = self
+    }
+}
+
+```
+
+<br>
+
+# View
+
+```swift
+import RIBs
+import RxSwift
+import UIKit
+
+/// View에서 어떤 action이 일어났을 경우 Interactor에게 알려줘야하는 일들 정의
+protocol LoggedInPresentableListener: class {
+
+}
+
+final class LoggedInViewController: UIViewController, LoggedInPresentable, LoggedInViewControllable {
+    weak var listner: LoggedInPresentableListener?
+}
+```
+<br>
+<br>
+
+# RIBs 아키텍쳐의 특징
+1. 템플릿화된 코드 및 테스트 작성
+2. (강제) 프로토콜 지향 프로그래밍
+3. 의존성 주입 DI
+    * 필요한 속성을 Dependency에 정의
+    * Dependency에 정의된 요소들 구현 필요
+        * Dependency가 확장되면 컴파일 에러 발생
+        * 해당 RIB을 사용하는 곳 모든 곳에서 작성해야 함
+
+<br>
+
+```swift
+import RIBs
+
+protocol LoggedInDependecy: Dependency {
+    var name: String { get }
+    var nickName: String { get }
+}
+
+/// Dependency 확장 (name, nickName필요)
+final class LoggedInComponent: Component<LoggedInDependency> {
+    fileprivate var name: String {
+        return dependency.name
+    }
+
+    fileprivate var nickName: String {
+        return dependency.nickName
+    }
+}
+
+///  User계정입력 화면 (자식 RIB)
+final class UserAccountInputComponent: Component<UserAccountInputDependency>, LoggedInDependency {
+    let name: String
+    let nickName: String
+
+    init(dependency: UserAccountInputDependency, name: String, nickName: String) {
+        self.name = name
+        self.nickName = nickName
+        super.int(dependency: dependency)
+    }
+}
+```
+* Viewless RIB를 통한 비즈니스 로직 정리
