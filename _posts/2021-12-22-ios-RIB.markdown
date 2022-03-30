@@ -12,6 +12,9 @@ tags:
 ### ❓ `RIB`
 
 ### ✅  (Router, Interactor, Builder) View가 없는 아키텍쳐
+### ✅ RIB : 하나의 기능을 담당하는 단위
+
+마치 VIPER처럼 하나의 기능을 만들 때 역할을 나눠서 컴포넌트에서 밸런스 있게 기능을 구현하고자 하는 것이 핵심
 
 <br>
 
@@ -52,6 +55,12 @@ tags:
 
 # Interactor
 
+### Interactor는 RIB의 비즈니스 로직을 가지고 있음
+* API가 어떻게 호출되는지, 데이터를 어떻게 적는지, state를 어떻게 관리하는지 등 모든 비즈니스 로직들 구현
+* 앞으로 어떤 state로 갈지의 판단들도 Interactor에서 구현됨
+
+<br>
+
 ```swift
 import RIBs
 import RxSwift
@@ -90,6 +99,7 @@ final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, Logg
     }
 }
 ```
+
 * Interactor는 Routing을 알고있어야하고, View를 알고 있어야하기 때문에 변수로 가지고 있게됨
 * Router를 어떻게 호출해야될지에 대해서는 Router에 있는것이 아니라, Interactor가 가지고 있어야함
     * Interactor에서 먼저 코드를 작성한 후에 LoggedInRouting에 정의를 함 (컴파일 기반 프로그래밍, protocol에 작성하지 않으면 컴파일 에러가 나기때문)
@@ -97,6 +107,13 @@ final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, Logg
 <br>
 
 # Router
+
+### 어떤 RIB들을 attach하고 dettach할지 결정
+Interactor의 비즈니스 로직에서 일어나는 routing들을 도와주는 Helper 개념
+* Interactor는 어떤RIB을 떨어뜨려라 라는 명령만 내림
+
+
+<br>
 
 ```swift
 import RIBs
@@ -119,10 +136,26 @@ final class LoggedInRouter: ViewableRouter<LoggedInInteractable, LoggedInViewCon
 }
 
 ```
+<br>
+
+# Builder
+
+### 팩토리 패턴으로 Interactor, Router, Presenter, View들을 생성해주는 역할
+
+각 Class 생성 로직이 Builder로 들어가게되서 컴포넌트들의 Mock ability들을 향상
+
+* 재사용성 극대화
+
+> 각 컴포넌트들은 자신의 코드를 그대로 유지하고, DI Framework에 따라서 Builder만 바꿔주는 형식으로 Mock ability들을 향상
 
 <br>
 
 # View
+
+### 현재상태를 화면에 보여줌
+필요할때만 추가하는 컴포넌트
+
+<br>
 
 ```swift
 import RIBs
@@ -139,6 +172,25 @@ final class LoggedInViewController: UIViewController, LoggedInPresentable, Logge
 }
 ```
 <br>
+
+# Presenter
+
+### Translation logic을 담당
+View처럼 View Logic이 필요할 때만 추가되는 컴포넌트
+
+<br>
+
+Presenter가 필요한 경우
+* Interactor에서 나오는 각종 데이터들은 정보가 부족한 경우 존재 
+* 반대로 정보가 너무 많은 경우 존재
+
+<br>
+
+Presenter가 하는 일
+
+* 직접 View에서 사용하기 적합하지 않을 때 Interactor에서 나오는 다양한 모델들을 View가 해석할 수 있는 형태로 변형 
+* view에서 일어나는 각종 action들을 Interactor가 해석할 수 있는 형태로 변형해주는 `Translation logic 담당`
+
 <br>
 
 # RIBs 아키텍쳐의 특징
@@ -184,3 +236,5 @@ final class UserAccountInputComponent: Component<UserAccountInputDependency>, Lo
 }
 ```
 * Viewless RIB를 통한 비즈니스 로직 정리
+
+
